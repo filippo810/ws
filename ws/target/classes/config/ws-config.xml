@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tool="http://www.springframework.org/schema/tool" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/tool http://www.springframework.org/schema/tool/spring-tool-4.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd
+		http://www.springframework.org/schema/tx 
+  		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+
+	<bean id="esEndpointImpl" class="backend.ws.es.EsEndpointImpl">
+		<property name="wsTemplate" ref="esWebServiceTemplate" />
+	</bean>
+
+
+	<bean id="esMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+		<property name="contextPath" value="model.ws.es" />
+	</bean>
+
+	<bean id="esWebServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+		<constructor-arg ref="messageFactory" />
+		<property name="defaultUri"
+			value="http://test.expertsystem.it/Accenture_Portal_POC/Portal_WS_mockup/ProductSearchServiceImplServiceSoapBinding.asmx" />
+		<property name="marshaller" ref="esMarshaller" />
+		<property name="unmarshaller" ref="esMarshaller" />
+		<property name="interceptors">
+			<list>
+				<bean class="backend.ws.es.PayloadLoggingInterceptor" />
+			</list>
+		</property>
+		<property name="messageSender">
+			<bean
+				class="org.springframework.ws.transport.http.HttpComponentsMessageSender">
+				<property name="connectionTimeout" value="3000" />
+				<property name="readTimeout" value="60000" />
+				<property name="maxTotalConnections" value="10" />
+				<property name="maxConnectionsPerHost">
+					<props>
+						<prop key="http://test.expertsystem.it">20</prop>
+					</props>
+				</property>
+
+			</bean>
+		</property>
+
+	</bean>
+
+	<bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory">
+		<property name="soapVersion">
+			<util:constant static-field="org.springframework.ws.soap.SoapVersion.SOAP_12" />
+		</property>
+	</bean>
+
+
+</beans>

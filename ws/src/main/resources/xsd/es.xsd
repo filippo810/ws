@@ -1,0 +1,216 @@
+<xs:schema elementFormDefault="qualified"
+	targetNamespace="http://service.search.portal.products.expertsystem.net/"
+	version="1.0" xmlns:tns="http://service.search.portal.products.expertsystem.net/"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:element name="search">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" name="arg0" type="tns:productSearchQuery" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="searchResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" name="return" type="tns:productSearchResult" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="productSearchQuery">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="areaSiteId" type="xs:string" />
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="assetProdIds"
+				nillable="true" type="xs:string" />
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="assetServIds"
+				nillable="true" type="xs:string" />
+			<xs:element minOccurs="0" name="clientType" type="xs:string" />
+			<xs:element minOccurs="0" name="configuration" type="tns:configuration" />
+			<xs:element minOccurs="0" name="customerId" type="xs:string" />
+			<xs:element minOccurs="0" name="expressionFilter" type="xs:string" />
+			<xs:element name="flagDidYouMean" type="xs:boolean" />
+			<xs:element name="generateStats" type="xs:boolean" />
+			<xs:element name="pageNumber" type="xs:int" />
+			<xs:element name="pageSize" type="xs:int" />
+			<xs:element minOccurs="0" name="productId" type="xs:string" />
+			<xs:element minOccurs="0" name="projectLanguage" type="xs:string" />
+			<xs:element minOccurs="0" name="queryLanguage" type="xs:string" />
+			<xs:element minOccurs="0" name="siteId" type="xs:string" />
+			<xs:element minOccurs="0" name="siteLoginId" type="xs:string" />
+			<xs:element minOccurs="0" name="sourceId" type="xs:string" />
+			<xs:element name="statisticsMetavaluesMap">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="entry">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element minOccurs="0" name="key" type="xs:string" />
+									<xs:element minOccurs="0" name="value" type="tns:values" />
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element minOccurs="0" name="statusProd" type="xs:string" />
+			<xs:element minOccurs="0" name="subCustomerId" type="xs:string" />
+			<xs:element minOccurs="0" name="text" type="xs:string" />
+			<xs:element minOccurs="0" name="textOld" type="xs:string" />
+			<xs:element minOccurs="0" name="topicId" type="xs:string" />
+			<xs:element minOccurs="0" name="userName" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="configuration">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="documentConfigurationParams"
+				type="tns:configurationParams" />
+			<xs:element minOccurs="0" name="faqcConfigurationParams"
+				type="tns:configurationParams" />
+			<xs:element minOccurs="0" name="faqsConfigurationParams"
+				type="tns:configurationParams" />
+			<xs:element minOccurs="0" name="slinkConfigurationParams"
+				type="tns:configurationParams" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="configurationParams">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="configId" type="xs:string" />
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="corpusNames"
+				nillable="true" type="xs:string" />
+			<xs:element maxOccurs="unbounded" minOccurs="0"
+				name="sectionWeights" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="values">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="values"
+				nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="productSearchResult">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="categFaqSearchResult"
+				type="tns:searchResult" />
+			<xs:element minOccurs="0" name="didYouMean" type="xs:string" />
+			<xs:element minOccurs="0" name="originalText" type="xs:string" />
+			<xs:element minOccurs="0" name="rankedSearchResult" type="tns:searchResult" />
+			<xs:element minOccurs="0" name="searchId" type="xs:string" />
+			<xs:element minOccurs="0" name="simpleFaqSearchResult"
+				type="tns:searchResult" />
+			<xs:element minOccurs="0" name="sponsoredLinkSearchResult"
+				type="tns:searchResult" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="searchResult">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0"
+				name="documentIdentifiers" nillable="true" type="tns:documentIdentifier" />
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="documents"
+				nillable="true" type="tns:document" />
+			<xs:element name="errorCode" type="xs:int" />
+			<xs:element name="faqPResponse" type="xs:boolean" />
+			<xs:element minOccurs="0" name="message" type="xs:string" />
+			<xs:element name="pageNumber" type="xs:int" />
+			<xs:element name="pageSize" type="xs:int" />
+			<xs:element name="totalPages" type="xs:int" />
+			<xs:element name="totalResults" type="xs:int" />
+			<xs:element name="totalSentences" type="xs:int" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="documentIdentifier">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="documentId" type="xs:string" />
+			<xs:element minOccurs="0" name="sentenceId" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="document">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="count" type="xs:int" />
+			<xs:element minOccurs="0" name="documentId" type="xs:string" />
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="fields"
+				nillable="true" type="tns:field" />
+			<xs:element minOccurs="0" name="firstSentence" type="xs:string" />
+			<xs:element name="metadataMap">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="entry">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element minOccurs="0" name="key" type="xs:string" />
+									<xs:element minOccurs="0" name="value" type="tns:fieldValues" />
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element minOccurs="0" name="score" type="xs:string" />
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="sentences"
+				nillable="true" type="tns:sentence" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="field">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="fieldId" type="xs:string" />
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="fieldValues"
+				nillable="true" type="tns:fieldValue" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="fieldValue">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="score" type="xs:string" />
+			<xs:element minOccurs="0" name="value" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="fieldValues">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="fieldValues"
+				nillable="true" type="tns:fieldValue" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="sentence">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="fields"
+				nillable="true" type="tns:field" />
+			<xs:element maxOccurs="unbounded" minOccurs="0"
+				name="firstPropositions" nillable="true" type="xs:string" />
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="highlights"
+				nillable="true" type="tns:highlight" />
+			<xs:element minOccurs="0" name="rank" type="xs:string" />
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="saos"
+				nillable="true" type="tns:sao" />
+			<xs:element maxOccurs="unbounded" minOccurs="0"
+				name="secondPropositions" nillable="true" type="xs:string" />
+			<xs:element minOccurs="0" name="sentenceId" type="xs:string" />
+			<xs:element minOccurs="0" name="text" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="highlight">
+		<xs:sequence>
+			<xs:element name="begin" type="xs:int" />
+			<xs:element name="end" type="xs:int" />
+			<xs:element minOccurs="0" name="text" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="sao">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="action" type="xs:string" />
+			<xs:element minOccurs="0" name="object" type="xs:string" />
+			<xs:element minOccurs="0" name="subject" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="hashMap">
+		<xs:complexContent>
+			<xs:extension base="tns:abstractMap">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType abstract="true" name="abstractMap">
+		<xs:sequence />
+	</xs:complexType>
+</xs:schema>

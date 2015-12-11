@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+
+
+
+	<Appenders>
+
+		<Console name="STDOUT" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%X{SESSION_ID} | %X{USER_ID} | %X{AGENZI_CODE} | %p  %c{1} - %m%n" />
+		</Console>
+
+	</Appenders>
+
+	<Loggers>
+
+		<Root level="DEBUG">
+			<AppenderRef ref="STDOUT" />
+		</Root>
+	</Loggers>
+
+</Configuration>
+
+
+
+
+<!-- Conversion Character Meaning -->
+<!-- -F The name of the file from which thelogging request was issued. -->
+<!-- -l The location information. Thisinformation can be quite useful when 
+	an application produces any exception stack trace. However, generating this 
+	information with log4j can be quite slow. A trade-off has to be made before 
+	this feature is used. -->
+<!-- -L The line number in the program file from which the logging request 
+	was issued. -->
+<!-- -m The logging message. -->
+<!-- -M The method in the program from which the logging request was issued. -->
+<!-- -n Platform-dependent line separator. -->
+<!-- -p The level associated with the logging request. -->
+<!-- -r The RELATIVE date format displaying the number of milliseconds elapsed 
+	from the start of the application before this logging request was issued. -->
+<!-- -t The invoking thread. -->
+<!-- -x The NDC information. -->
+<!-- -X The Message Diagnostic Context (MDC) information. The X conversion 
+	character is followed by the key for the MDC. For example, X{clientIP} will 
+	print the information stored in the MDC against the key clientIP. -% The 
+	literal percent sign. %% will print a % sign. -->
